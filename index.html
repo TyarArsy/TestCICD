@@ -1,11 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Kalkulator BMI Modern</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; display: flex; justify-content: center; padding-top: 50px; }
+        .card { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 300px; }
+        input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; }
+        button { width: 100%; padding: 10px; background: #0070f3; color: white; border: none; border-radius: 6px; cursor: pointer; }
+        button:hover { background: #0051b3; }
+    </style>
+</head>
 <body>
-  <h2>Kalkulator BMI</h2>
-  <form action="/api" method="GET">
-    Berat (kg): <input type="number" name="berat" required><br><br>
-    Tinggi (cm): <input type="number" name="tinggi" required><br><br>
-    <button type="submit">Hitung BMI</button>
-  </form>
+    <div class="card">
+        <h2>Kalkulator BMI</h2>
+        <form action="/api" method="GET">
+            <input type="number" name="berat" placeholder="Berat (kg)" required>
+            <input type="number" name="tinggi" placeholder="Tinggi (cm)" required>
+            <button type="submit">Hitung Sekarang</button>
+        </form>
+    </div>
 </body>
 </html>

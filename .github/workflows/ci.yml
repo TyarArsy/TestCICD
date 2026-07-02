@@ -1,32 +1,5 @@
 name: Node.js CI Pipeline
 
-# on:
-#   push:
-#     branches: [ "master", "main" ]
-
-# jobs:
-#   build-and-test:
-#     runs-on: ubuntu-latest
-
-#     steps:
-#     - name: Ambil kode dari repository
-#       uses: actions/checkout@v4
-
-#     - name: Setup Node.js
-#       uses: actions/setup-node@v4
-#       with:
-#         node-version: '20'
-
-#     - name: Install dependencies (Jest)
-#       run: npm install
-
-#     - name: Jalankan Automated Test
-#       run: npm test
-
-
-#       name: Node.js CI Pipeline
-name: Node.js CI Pipeline
-
 on:
   push:
     branches: [ "master", "main" ]
@@ -44,9 +17,10 @@ jobs:
       with:
         node-version: '20'
 
-    - name: Install dependencies
-      run: npm install
+    # JURUS TERAKHIR: Install Jest secara global di runner GitHub
+    - name: Install Jest Global
+      run: npm install -g jest
 
     - name: Jalankan Automated Test
-      # Kita gunakan 'node_modules/.bin/jest' secara spesifik
-      run: chmod +x node_modules/.bin/jest && ./node_modules/.bin/jest
+      # Sekarang kita panggil jest langsung karena sudah terinstall global
+      run: jest

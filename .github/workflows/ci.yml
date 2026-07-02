@@ -16,8 +16,8 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Run Tests
-        run: ./node_modules/.bin/jest
-
+        # Perubahan ada di sini: Panggil lewat 'node' langsung
+        run: node node_modules/jest/bin/jest.js
   deploy:
     needs: test
     runs-on: ubuntu-latest

@@ -25,6 +25,7 @@ name: Node.js CI Pipeline
 
 
 #       name: Node.js CI Pipeline
+name: Node.js CI Pipeline
 
 on:
   push:
@@ -47,5 +48,5 @@ jobs:
       run: npm install
 
     - name: Jalankan Automated Test
-      # Menggunakan npm exec (atau npx) agar tidak terhambat permission
-      run: npm exec jest
+      # Kita gunakan 'node_modules/.bin/jest' secara spesifik
+      run: chmod +x node_modules/.bin/jest && ./node_modules/.bin/jest

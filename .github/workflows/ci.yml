@@ -14,16 +14,18 @@ jobs:
         with:
           node-version: '20'
       - name: Install dependencies
-        run: |
-          npm install
-          npm install -g jest
+        run: npm install
       - name: Run Tests
-        run: jest
+        run: ./node_modules/.bin/jest
 
   deploy:
     needs: test
     runs-on: ubuntu-latest
     environment: production
     steps:
+      - uses: actions/checkout@v4
       - name: Deploy ke Vercel
-        run: echo "Menunggu persetujuan manual untuk deploy..."
+        # Hanya akan berjalan setelah kamu klik 'Approve' di GitHub
+        run: |
+          npm install --global vercel
+          vercel --prod --token ${{ secrets.Deployment }} --yes

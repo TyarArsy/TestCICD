@@ -2,25 +2,26 @@ name: Node.js CI Pipeline
 
 on:
   push:
-    branches: [ "master", "main" ]
+    branches: [ "master" ]
 
 jobs:
-  build-and-test:
+  test:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Ambil kode dari repository
-      uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm install
+      - run: npm test
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
-
-    # JURUS TERAKHIR: Install Jest secara global di runner GitHub
-    - name: Install Jest Global
-      run: npm install -g jest
-
-    - name: Jalankan Automated Test
-      # Sekarang kita panggil jest langsung karena sudah terinstall global
-      run: jest
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    environment: production  # Ini yang menghubungkan ke aturan 'approval'
+    steps:
+      - name: Deploy ke Vercel
+        # GitHub akan berhenti di sini sampai kamu klik 'Approve' di dashboard
+        run: echo "Menunggu persetujuan manual untuk deploy..."
+        

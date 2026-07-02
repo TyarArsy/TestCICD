@@ -16,9 +16,9 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Run Tests
-        # Perubahan ada di sini: Panggil lewat 'node' langsung
         run: node node_modules/jest/bin/jest.js
-deploy:
+
+  deploy:
     needs: test
     runs-on: ubuntu-latest
     environment: production
@@ -26,10 +26,7 @@ deploy:
       - uses: actions/checkout@v4
       - name: Deploy ke Vercel
         env:
-          VERCEL_TOKEN: ${{ secrets.Deployment }}
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
           npm install --global vercel
-          # Menghubungkan otomatis & deploy
-          vercel --prod --yes
-
-          
+          vercel --prod --token $VERCEL_TOKEN --yes

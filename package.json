@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "npx jest",
     "start": "node index.js"
   },
   "keywords": [],
@@ -12,7 +12,9 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "express": "^5.2.1",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
     "jest": "^30.4.2"
   }
 }

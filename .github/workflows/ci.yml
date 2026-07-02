@@ -5,6 +5,7 @@ on:
     branches: [ "master" ]
 
 jobs:
+
   test:
     runs-on: ubuntu-latest
     steps:
@@ -13,8 +14,21 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - run: npm install
-      - run: npm test
+      - name: Install Dependencies
+        run: npm install
+      - name: Run Tests
+        run: npm test
+
+  # test:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Setup Node
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: '20'
+  #     - run: npm install
+  #     - run: npm test
 
   deploy:
     needs: test
@@ -24,4 +38,3 @@ jobs:
       - name: Deploy ke Vercel
         # GitHub akan berhenti di sini sampai kamu klik 'Approve' di dashboard
         run: echo "Menunggu persetujuan manual untuk deploy..."
-        

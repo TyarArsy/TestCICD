@@ -5,8 +5,7 @@ on:
     branches: [ "master" ]
 
 jobs:
-
-test:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -14,7 +13,7 @@ test:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Install dependencies & Jest
+      - name: Install dependencies
         run: |
           npm install
           npm install -g jest
@@ -24,8 +23,7 @@ test:
   deploy:
     needs: test
     runs-on: ubuntu-latest
-    environment: production  # Ini yang menghubungkan ke aturan 'approval'
+    environment: production
     steps:
       - name: Deploy ke Vercel
-        # GitHub akan berhenti di sini sampai kamu klik 'Approve' di dashboard
         run: echo "Menunggu persetujuan manual untuk deploy..."

@@ -18,14 +18,18 @@ jobs:
       - name: Run Tests
         # Perubahan ada di sini: Panggil lewat 'node' langsung
         run: node node_modules/jest/bin/jest.js
-  deploy:
+deploy:
     needs: test
     runs-on: ubuntu-latest
     environment: production
     steps:
       - uses: actions/checkout@v4
       - name: Deploy ke Vercel
-        # Hanya akan berjalan setelah kamu klik 'Approve' di GitHub
+        env:
+          VERCEL_TOKEN: ${{ secrets.Deployment }}
         run: |
           npm install --global vercel
-          vercel --prod --token ${{ secrets.Deployment }} --yes
+          # Menghubungkan otomatis & deploy
+          vercel --prod --yes
+
+          
